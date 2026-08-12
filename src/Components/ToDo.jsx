@@ -11,9 +11,13 @@ export const ToDoComponent = () => {
 
     const handleformSubmit = (event) => {
        event.preventDefault();
+
        if(!inputValue) return;
+       if(submitValue.includes(inputValue)) return alert(`Your Task ${inputValue} already added`);
 
        setsubmitValue((value) => [...value,inputValue]);
+
+       setinputvalue("");
     };
 
     return <section className='todo-container'>
@@ -35,7 +39,6 @@ export const ToDoComponent = () => {
                     <button className='todo-btn' type='submit'>Add Task </button>
                 </div>
             </form>
-    
         </section>
     </section>
 };
