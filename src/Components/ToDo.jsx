@@ -3,12 +3,17 @@ import '../Components/style.css'
 export const ToDoComponent = () => {
 
     const [inputValue,setinputvalue] = useState("");
+    const [submitValue,setsubmitValue] = useState([]);
+
     const handleInputValue = (value) => {
         setinputvalue(value)
     };
 
     const handleformSubmit = (event) => {
-       event.preventDefault()
+       event.preventDefault();
+       if(!inputValue) return;
+
+       setsubmitValue((value) => [...value,inputValue]);
     };
 
     return <section className='todo-container'>
