@@ -1,12 +1,12 @@
-import { ToDoComponent } from "./Components/ToDoCompontent"
+import { ToDoComponent } from "./Components/ToDo"
 
 
 function App() {
   
   return (
-    <>
+    <section>
       <ToDoComponent />
-    </>
+    </section>
   )
 }
 
