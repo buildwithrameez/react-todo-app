@@ -5,6 +5,7 @@ export const ToDoComponent = () => {
 
     const [inputValue,setinputvalue] = useState("");
     const [submitValue,setsubmitValue] = useState([]);
+    const [timeDate, settimeDate] = useState("");
 
     const handleInputValue = (value) => {
         setinputvalue(value)
@@ -27,10 +28,30 @@ export const ToDoComponent = () => {
        setinputvalue("");
     };
 
+    // Todo date and time
+    // const now = new Date();
+    // const formattedDate = now.toLocaleDateString();
+    // const formattedTime = now.toLocaleTimeString();
+ 
+    // const getDateTime = () => {
+    // const now = new Date();
+    // const formattedDate = now.toLocaleDateString();
+    // const formattedTime = now.toLocaleTimeString();
+    // };
+
+    setInterval(() => {
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString();
+    const formattedTime = now.toLocaleTimeString();
+    settimeDate(`${formattedDate } - ${formattedTime}`)
+    },1000);
+
+
     return <section className='todo-container'>
         <header>
             <h1>Todo List</h1>
              {/* for time and date */}
+            <h2 className='date-time'>{timeDate}</h2> 
         </header>
 
         <section className='form'>
