@@ -50,7 +50,12 @@ export const ToDoComponent = () => {
     return () => clearInterval(interval);
     },[]);
 
-    
+    // Function to Delete the list itme
+    const handleDeleteClick = (text) => {
+        const updateList =  submitValue.filter((curr) => curr !== text);
+        setsubmitValue(updateList);
+
+    };
 
 
     return <section className='todo-container'>
@@ -79,13 +84,16 @@ export const ToDoComponent = () => {
            <ul>
             {
                 submitValue.map((curr,index) => {
+
                    return <li key={index} className='todo-item '>
                          <span>{curr}</span>
                          <button className='check-btn'>
                             <MdCheck />
                         </button>
                          <button className='delete-btn'>
-                            <MdDeleteForever />
+                            <MdDeleteForever onClick={
+                                () => handleDeleteClick(curr)
+                            }/>
                         </button>
                    </li>
                 })
