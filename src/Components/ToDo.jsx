@@ -57,6 +57,22 @@ export const ToDoComponent = () => {
 
     };
 
+    // clear all list
+    const handleClearList = () => {
+
+        if (submitValue.length === 0) {
+        alert("The list is already empty!");
+        return;
+        }    
+
+        const confirmDelete = window.confirm("Are you sure you want to delete all items?");
+  
+       if (confirmDelete) {
+       setsubmitValue([]);
+       }
+       
+    };
+
 
     return <section className='todo-container'>
         <header>
@@ -88,7 +104,7 @@ export const ToDoComponent = () => {
                    return <li key={index} className='todo-item '>
                          <span>{curr}</span>
                          <button className='check-btn'>
-                            <MdCheck />
+                            <MdCheck onClick={() => handleComClick(curr)}/>
                         </button>
                          <button className='delete-btn'>
                             <MdDeleteForever onClick={
@@ -99,6 +115,11 @@ export const ToDoComponent = () => {
                 })
             }
            </ul>
+        </section>
+
+        <section>
+            <button className='clear-btn' onClick={() => handleClearList()}>Clear all</button>
+            
         </section>
     </section>
 };

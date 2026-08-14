@@ -194,3 +194,9 @@ li span {
     padding: 1.2rem 2rem;
   }
 }
+
+.completed-text {
+  text-decoration: line-through;
+  color: gray; /* Optional: text ka rang thora halka karne ke liye */
+  opacity: 0.6;
+}
