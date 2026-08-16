@@ -61,7 +61,7 @@ export const ToDoComponent = () => {
     const handleClearList = () => {
 
         if (submitValue.length === 0) {
-        alert("The list is already empty!");
+        alert("List is already empty!");
         return;
         }    
 
