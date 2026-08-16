@@ -1,32 +1,30 @@
 import { useEffect, useState } from 'react';
 import { MdCheck,MdDeleteForever } from "react-icons/md";
 import '../Components/style.css'
+import { TodoForm } from './TodoForm';
+
 export const ToDoComponent = () => {
 
-    const [inputValue,setinputvalue] = useState("");
+    
     const [submitValue,setsubmitValue] = useState([]);
     const [timeDate, settimeDate] = useState("");
 
-    const handleInputValue = (value) => {
-        setinputvalue(value)
-    };
+     const handleformSubmit = (inputValue) => {
+           if(!inputValue) return;
+           if(submitValue.includes(inputValue)) return;
+        //     {
+        //     return
+        //     alert(`Your Task ${inputValue} already added 
+        //     ${setinputvalue("")}
+        //     `);
+           
+        //    }
+           setsubmitValue((value) => [...value,inputValue]);
+    
+         
+        };
 
-    const handleformSubmit = (event) => {
-       event.preventDefault();
-
-       if(!inputValue) return;
-       if(submitValue.includes(inputValue)) 
-        {
-        return
-        alert(`Your Task ${inputValue} already added 
-        ${setinputvalue("")}
-        `);
-       
-       }
-       setsubmitValue((value) => [...value,inputValue]);
-
-       setinputvalue("");
-    };
+   
 
     // Todo date and time
     // const now = new Date();
@@ -81,20 +79,8 @@ export const ToDoComponent = () => {
             <h2 className='date-time'>{timeDate}</h2> 
         </header>
 
-        <section className='form'>
-            <form onSubmit={handleformSubmit}>
-                <div>
-                    <input type="text" className='todo-input' autoComplete='off'
-                    value={inputValue}
-                    onChange={((event) => handleInputValue(event.target.value))}
-                    />
-                </div>
-
-                <div>
-                    <button className='todo-btn' type='submit'>Add Task </button>
-                </div>
-            </form>
-        </section>
+{/*Form Section */}
+        <TodoForm onAddTodo = {handleformSubmit}/>
         {/* Section to show list Items */}
         <section className='myUnOrdList'>
            <ul>
