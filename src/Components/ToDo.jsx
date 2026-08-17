@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
-import { MdCheck,MdDeleteForever } from "react-icons/md";
 import '../Components/style.css'
+import { useState } from 'react';
 import { TodoForm } from './TodoForm';
+import { TodoList } from './TodoList';
+import { DateTime } from './TodoDateTime';
+
 
 export const ToDoComponent = () => {
-
-    
     const [submitValue,setsubmitValue] = useState([]);
-    const [timeDate, settimeDate] = useState("");
-
      const handleformSubmit = (inputValue) => {
            if(!inputValue) return;
            if(submitValue.includes(inputValue)) return;
@@ -16,16 +14,10 @@ export const ToDoComponent = () => {
         //     return
         //     alert(`Your Task ${inputValue} already added 
         //     ${setinputvalue("")}
-        //     `);
-           
+        //     `);    
         //    }
            setsubmitValue((value) => [...value,inputValue]);
-    
-         
         };
-
-   
-
     // Todo date and time
     // const now = new Date();
     // const formattedDate = now.toLocaleDateString();
@@ -37,16 +29,7 @@ export const ToDoComponent = () => {
     // const formattedTime = now.toLocaleTimeString();
     // };
 
-    useEffect(() => {
-    const interval =setInterval(() => {
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString();
-    const formattedTime = now.toLocaleTimeString();
-    settimeDate(`${formattedDate } - ${formattedTime}`)
-    },1000);
-
-    return () => clearInterval(interval);
-    },[]);
+   
 
     // Function to Delete the list itme
     const handleDeleteClick = (text) => {
@@ -76,28 +59,22 @@ export const ToDoComponent = () => {
         <header>
             <h1>Todo List</h1>
              {/* for time and date */}
-            <h2 className='date-time'>{timeDate}</h2> 
+            <DateTime /> 
         </header>
 
 {/*Form Section */}
         <TodoForm onAddTodo = {handleformSubmit}/>
-        {/* Section to show list Items */}
+
+{/* Section to show list Items */}
         <section className='myUnOrdList'>
            <ul>
             {
                 submitValue.map((curr,index) => {
 
-                   return <li key={index} className='todo-item '>
-                         <span>{curr}</span>
-                         <button className='check-btn'>
-                            <MdCheck onClick={() => handleComClick(curr)}/>
-                        </button>
-                         <button className='delete-btn'>
-                            <MdDeleteForever onClick={
-                                () => handleDeleteClick(curr)
-                            }/>
-                        </button>
-                   </li>
+                   return <TodoList  data ={curr} key={index} onDelete = {
+                    handleDeleteClick
+                   }/>
+                   
                 })
             }
            </ul>
