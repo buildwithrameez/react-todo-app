@@ -200,3 +200,12 @@ li span {
   color: gray; /* Optional: text ka rang thora halka karne ke liye */
   opacity: 0.6;
 }
+
+.checkList{
+  text-decoration: line-through;
+}
+
+.notCheckList{
+  text-decoration: none;
+
+}

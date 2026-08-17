@@ -1,4 +1,4 @@
-import '../Components/style.css'
+import '../Components/style.css';
 import { useState } from 'react';
 import { TodoForm } from './TodoForm';
 import { TodoList } from './TodoList';
@@ -8,15 +8,26 @@ import { DateTime } from './TodoDateTime';
 export const ToDoComponent = () => {
     const [submitValue,setsubmitValue] = useState([]);
      const handleformSubmit = (inputValue) => {
-           if(!inputValue) return;
-           if(submitValue.includes(inputValue)) return;
+        const {id, content, checked} = inputValue;
+          // if the content not added in inputfield
+           if(!content) return;
+
+        // For Array
+        //    if(submitValue.includes(content)) return;
         //     {
         //     return
         //     alert(`Your Task ${inputValue} already added 
         //     ${setinputvalue("")}
         //     `);    
-        //    }
-           setsubmitValue((value) => [...value,inputValue]);
+        //    }   
+
+        
+        // for object   
+        const ifContentMatch = submitValue.find((currTask) => currTask.content === content);
+        if (ifContentMatch) return;
+
+        
+        setsubmitValue((value) => [...value,{id, content, checked}]);
         };
     // Todo date and time
     // const now = new Date();
@@ -33,7 +44,7 @@ export const ToDoComponent = () => {
 
     // Function to Delete the list itme
     const handleDeleteClick = (text) => {
-        const updateList =  submitValue.filter((curr) => curr !== text);
+        const updateList =  submitValue.filter((curr) => curr.content !== text);
         setsubmitValue(updateList);
 
     };
@@ -54,6 +65,17 @@ export const ToDoComponent = () => {
        
     };
 
+    //todo handleChecked Todo Tick
+    const handleClickTick = (event) => {
+      const updateTask = submitValue.map((curr) => {
+        if (curr.content == event) {
+            return {...curr,checked: !curr.checked}
+        }else{
+            return curr;
+        }
+      });
+         setsubmitValue(updateTask);
+    };
 
     return <section className='todo-container'>
         <header>
@@ -69,11 +91,14 @@ export const ToDoComponent = () => {
         <section className='myUnOrdList'>
            <ul>
             {
-                submitValue.map((curr,index) => {
-
-                   return <TodoList  data ={curr} key={index} onDelete = {
-                    handleDeleteClick
-                   }/>
+                submitValue.map((curr) => {
+                return <TodoList
+                  data ={curr.content}
+                   key={curr.id} 
+                   checked= {curr.checked}
+                   onDelete = {handleDeleteClick}
+                   onhandleClick = {handleClickTick}
+                />
                    
                 })
             }

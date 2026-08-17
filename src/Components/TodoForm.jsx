@@ -1,15 +1,15 @@
 import { useState } from "react";
 export const TodoForm = ({onAddTodo}) => {
-    const [inputValue,setinputvalue] = useState("");
+    const [inputValue,setinputvalue] = useState({});
 
     const handleInputValue = (value) => {
-        setinputvalue(value)
+        setinputvalue({id: value, content: value, checked: false})
     };
 
     const handleformSubmit = (event) => {
         event.preventDefault();
         onAddTodo(inputValue);
-        setinputvalue("");
+        setinputvalue({id: '', content: '', checked: false})
     };
 
     return (
@@ -17,7 +17,7 @@ export const TodoForm = ({onAddTodo}) => {
                     <form onSubmit={handleformSubmit}>
                         <div>
                             <input type="text" className='todo-input' autoComplete='off'
-                            value={inputValue}
+                            value={inputValue.content}
                             onChange={((event) => handleInputValue(event.target.value))}
                             />
                         </div>
