@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { TodoForm } from './TodoForm';
 import { TodoList } from './TodoList';
 import { DateTime } from './TodoDateTime';
-import { getLocalDataFunc } from './TodoLocalStorage';
-import { setLocalDataFunc } from './TodoLocalStorage';
+import { getLocalDataFunc, setLocalDataFunc  } from './TodoLocalStorage';
+
 
 
 export const ToDoComponent = () => {
