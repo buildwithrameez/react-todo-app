@@ -3,15 +3,17 @@ import { useState } from 'react';
 import { TodoForm } from './TodoForm';
 import { TodoList } from './TodoList';
 import { DateTime } from './TodoDateTime';
+import { getLocalDataFunc } from './TodoLocalStorage';
+import { setLocalDataFunc } from './TodoLocalStorage';
 
 
 export const ToDoComponent = () => {
-    const todoKey = 'reactTodo';
-    const [submitValue,setsubmitValue] = useState(() => {
-        const localData = localStorage.getItem(todoKey);
-        if (!localData) return [];
-        return JSON.parse(localData);
-    });
+    
+
+    
+
+    const [submitValue,setsubmitValue] = useState(() => 
+        getLocalDataFunc());
 
      const handleformSubmit = (inputValue) => {
         const {id, content, checked} = inputValue;
@@ -37,8 +39,7 @@ export const ToDoComponent = () => {
         };
 
     // Todo store data to Local Storage
-    localStorage.setItem(todoKey, JSON.stringify(submitValue));
-    
+    setLocalDataFunc(submitValue);
 
     // Todo date and time
     // const now = new Date();
