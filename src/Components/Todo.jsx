@@ -6,7 +6,13 @@ import { DateTime } from './TodoDateTime';
 
 
 export const ToDoComponent = () => {
-    const [submitValue,setsubmitValue] = useState([]);
+    const todoKey = 'reactTodo';
+    const [submitValue,setsubmitValue] = useState(() => {
+        const localData = localStorage.getItem(todoKey);
+        if (!localData) return [];
+        return JSON.parse(localData);
+    });
+
      const handleformSubmit = (inputValue) => {
         const {id, content, checked} = inputValue;
           // if the content not added in inputfield
@@ -29,6 +35,11 @@ export const ToDoComponent = () => {
         
         setsubmitValue((value) => [...value,{id, content, checked}]);
         };
+
+    // Todo store data to Local Storage
+    localStorage.setItem(todoKey, JSON.stringify(submitValue));
+    
+
     // Todo date and time
     // const now = new Date();
     // const formattedDate = now.toLocaleDateString();
